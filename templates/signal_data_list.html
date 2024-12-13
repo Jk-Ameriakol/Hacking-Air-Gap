@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Signal Data List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Signal Data List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Experiment</th>
+                <th scope="col">Signal</th>
+                <th scope="col">Decoded Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in signal_data %}
+                <tr>
+                    <td>{{ data.experiment.title }}</td>
+                    <td>{{ data.signal }}</td>
+                    <td>{{ data.decoded_data }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="mt-5">Signal Data Visualization</h3>
+    <div>
+        <canvas id="signalChart" width="400" height="200"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var ctx = document.getElementById('signalChart').getContext('2d');
+        var signalData = {{ signal_data|safe }};
+
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: signalData.length}, (_, i) => i + 1),
+                datasets: [{
+                    label: 'Signal Data',
+                    data: signalData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+    <br>
+{% endblock %}

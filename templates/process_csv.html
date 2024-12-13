@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Process CSV{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Process CSV File</h2>
+    <form method="post" class="shadow p-4 bg-white rounded">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="signal_column">Select Signal Column:</label>
+            <select name="signal_column" class="form-control" required>
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-3">Process</button>
+    </form>
+</div>
+{% endblock %}

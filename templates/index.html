@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the Air Gap Hacking Project</h1>
+    <p class="lead">Explore methods to exfiltrate data from air-gapped systems using electromagnetic emissions.</p>
+    <hr class="my-4">
+    <p>Start by creating an experiment or uploading signal data.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'experiment_list' %}" role="button">View Experiments</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'signal_data_list' %}" role="button">View Signal Data</a>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-flask fa-3x mb-3"></i>
+                    <h5 class="card-title">Experiments</h5>
+                    <p class="card-text">Create and manage your experiments.</p>
+                    <a href="{% url 'create_experiment' %}" class="btn btn-primary">Create Experiment</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-signal fa-3x mb-3"></i>
+                    <h5 class="card-title">Signal Data</h5>
+                    <p class="card-text">Upload and analyze signal data.</p>
+                    <a href="{% url 'upload_csv' %}" class="btn btn-secondary">Upload Signal Data</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-info-circle fa-3x mb-3"></i>
+                    <h5 class="card-title">About</h5>
+                    <p class="card-text">Learn more about our project.</p>
+                    <a href="#" class="btn btn-info">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
